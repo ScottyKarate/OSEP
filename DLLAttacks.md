@@ -19,6 +19,14 @@ From VS Code Developer Command promt
 dumpbin /exports file.dll  
 
 
+### tool to copy all export functions from a DLL so you can perform DLL hijacking without application crashing. 
+
+[Tool https://github.com/mrexodia/perfect-dll-proxy  
+
+usage: python perfect_dll_proxy.py file.dll  
+
+
+
 ### securing against DLL sideloading  
 
 To mitigate DLL sideloading, developers should use secure API calls like LoadLibraryExA() with LOAD_LIBRARY_SEARCH_* flags and configure the DLL search path explicitly using SetDefaultDllDirectories() or AddDllDirectory().  
