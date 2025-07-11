@@ -9,7 +9,14 @@ The Windows directory
 The current working directory  
 The directories listed in the PATH environment variable  
 
+### Check zone of the file to see if its got Mark Of The Web (Security prompt)
 
+Get-Content -Path .\putty.exe -Stream Zone.Identifier  
+
+### Query DLL file for its exported functions so you can copy them
+From VS Code Developer Command promt  
+
+dumpbin /exports file.dll  
 
 
 ### securing against DLL sideloading  
