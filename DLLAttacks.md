@@ -9,6 +9,14 @@ The Windows directory
 The current working directory  
 The directories listed in the PATH environment variable  
 
+### Criteria to be able to attempt DLL hijacking in procmon.exe  
+
+Process Name Contains executable  
+Operation is CreateFile  
+Result is Name Not Found  
+Path ends with .dll  
+
+
 ### Check zone of the file to see if its got Mark Of The Web (Security prompt)
 
 Get-Content -Path .\putty.exe -Stream Zone.Identifier  
@@ -24,6 +32,12 @@ dumpbin /exports file.dll
 [Tool https://github.com/mrexodia/perfect-dll-proxy  
 
 usage: python perfect_dll_proxy.py file.dll  
+
+
+
+
+
+
 
 
 
