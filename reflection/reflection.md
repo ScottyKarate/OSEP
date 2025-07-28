@@ -48,6 +48,9 @@ function LookupFunc {
 
 ## Complete script to call virtualalloc/createthread/WaitForSingleObject
 
+#### You must match the getDelegateType $func to the signature of the method youre calling.  
+
+
 LookupFunc: Looks for System.dll and tries to locate 'GetProcAddress' and 'GetModuleHandle'
 
 getDelegateType: Does magic and sets the delegateType so you can call unmanaged code.
