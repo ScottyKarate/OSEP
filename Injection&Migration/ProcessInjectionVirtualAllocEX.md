@@ -89,7 +89,10 @@ For the fourth argument, lpStartAddress, we must specify the starting address of
 
 The remaining two arguments include various flags (dwCreationFlags) and an output variable for a thread ID (lpThreadId), both of which we will ignore.   
 <br><br><br>
+<br><br><br>
 
+
+**REMEMBER TO ALWAYS COMPILE IN FOR THE RIGHT ARCHITECHTURE!  X64 or X86.....**
 
 Final C# script to inject into explorer.exe found by name.  If there are multiple explorer.exe running this will inject into all of them.  Correct script to point to 0 in explorerprocess array for first instance of explorer.exe  <br><br>
 ```C#
