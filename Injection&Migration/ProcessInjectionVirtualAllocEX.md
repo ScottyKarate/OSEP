@@ -92,7 +92,7 @@ The remaining two arguments include various flags (dwCreationFlags) and an outpu
 <br><br><br>
 
 
-**REMEMBER TO ALWAYS COMPILE IN FOR THE RIGHT ARCHITECHTURE!  X64 or X86.....**
+**REMEMBER TO ALWAYS COMPILE IN FOR THE RIGHT ARCHITECTURE!  X64 or X86.....**
 
 Final C# script to inject into explorer.exe found by name.  If there are multiple explorer.exe running this will inject into all of them.  Correct script to point to 0 in explorerprocess array for first instance of explorer.exe  <br><br>
 ```C#
