@@ -1,4 +1,12 @@
 # Create a process in suspended state and then locate the entry points and inject into them
+<br><br><br>
+
+<img width="937" height="897" alt="image" src="https://github.com/user-attachments/assets/88c7b687-9f1c-4fb4-973b-fac2411719a8" />
+
+
+
+
+
 
 ### Buf was obfuscated with XOR and whole payload has a sleep timer to avoid antivirus.
 
