@@ -47,3 +47,21 @@
 
 
 ```
+
+
+
+## This is a sleep timer.  Used to delay loading and bypass AV
+
+*** Sleep here is from the win32 API's ***
+
+``` Csharp
+
+    DateTime t1 = DateTime.Now;
+    Sleep(2000);
+    double t2 = DateTime.Now.Subtract(t1).TotalSeconds;
+    if(t2 < 1.5)
+    {
+        return;
+    }
+
+```
