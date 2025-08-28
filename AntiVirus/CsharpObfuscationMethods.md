@@ -68,7 +68,7 @@
 
 <br><br>
 
-## VBA obfuscation in C# of shellcode byte array
+## Ceasar cipher in C# of shellcode byte array to be used in VBA macros
 
 *** Usage: Take array of bytes from this and 
 
@@ -93,5 +93,15 @@
    }
  }
  Console.WriteLine("The payload is: " + hex.ToString());
+
+```
+
+*** VBA method to unceaser cipher above encrypted payload 
+
+``` VBA
+
+For i = 0 To UBound(buf)
+    buf(i) = buf(i) - 2
+Next i
 
 ```
