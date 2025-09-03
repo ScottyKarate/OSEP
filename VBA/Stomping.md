@@ -2,6 +2,8 @@
 
 <br><br>
 
+*** VirusTotal showed that EvilClippy had more detections than just performing the two steps below ***
+
 #### Tools required
 
 1) FlexHex (Manual editing)
