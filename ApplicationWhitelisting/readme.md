@@ -9,6 +9,8 @@
 
 ### Bypassing AppLocker with PowerShell
 5) [Check Constrained Language mode](#ps-mode)
+6) [Custom Runspaces (Powershell in C#)](#ps-in-csharp)
+
 <br><br>
 
 
@@ -95,3 +97,17 @@ he first (and default) level, **FullLanguage**, allows all cmdlets and the entir
 ``` powershell
 $ExecutionContext.SessionState.LanguageMode
 ```
+<br>
+
+To see if you are in FullLanguage you can use the math C# function:
+``` powershell
+[Math]::Cos(1)
+```
+<br><br>
+
+## Custom Runspaces
+<a name="ps-in-csharp"></a>
+
+
+
+
