@@ -132,7 +132,7 @@ Locate System.Management.Automation.dll via Powershell
  Get-ChildItem -File System.Management.Automation.dll -Recurse -Path C:\ -ErrorAction Ignore
 ```
 
-Personal PC this located multiple areas.  This didnt work for me:
+Personal PC this located multiple areas.  This didnt work for me using .NET 8.0:
 1) C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\ **DLL**
 2) C:\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\ **DLL**
 <br><br><br>
