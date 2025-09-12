@@ -1,14 +1,17 @@
 ## Applocker
 
-Bypasses:
+### basic bypasses:
 1) [Trusted Folders](#trusted-folders)
 2) [Bypass with DLLs](#bypass-with-dlls)
 3) [Alternate Data Streams](#alternate-data-streams)
 4) [Third Party Executables](#third-party)
 
+5) [Check Constrained Language mode](#ps-mode)
+<br><br>
+
 
 #### Brief backbround 
-<br><br>
+
 
 <img width="843" height="715" alt="image" src="https://github.com/user-attachments/assets/2e218654-251b-40ac-8ec6-3b9401c5b371" />
 
@@ -45,8 +48,9 @@ Ex: icacls.exe C:\Windows\Tasks
 **The default ruleset doesn't protect against loading arbitrary DLLs.**
 
 <img width="807" height="346" alt="image" src="https://github.com/user-attachments/assets/192ef529-54b1-4d0b-9cbe-35fe78e9809b" />
+<br><br>
 
-**When enabled, default rules allow execution in C:\Windows\* AND C:\Program Files** this does not include C:\program files(x86)
+**When enabled though, default rules allow execution in C:\Windows\* AND C:\Program Files** this does not include C:\program files(x86)
 
 <br><br>
 
@@ -80,3 +84,12 @@ To execute ADS: **wscript "C:\program files (x86)\TeamViewer\TeamViewer12_Logfil
 **Third party frameworks like Python,Perl, Java and Microsoft Office VBA are NOT blocked by AppLocker**
 <br><br><br>
 
+## Powershell Execution policy
+
+Three levels of protection via Constrained Language policy  
+
+he first (and default) level, **FullLanguage**, allows all cmdlets and the entire .NET framework as well as C# code execution. By contrast, **NoLanguage** disallows all script text. **RestrictedLanguage** offers a compromise, allowing default cmdlets but heavily restricting much else.
+
+``` powershell
+$ExecutionContext.SessionState.LanguageMode
+```
