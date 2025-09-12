@@ -1,7 +1,7 @@
 ## Applocker
 
 Bypasses:
-1) [Trusted Folders](#-trusted-folders)
+1) [Trusted Folders](#trusted-folders)
 
 
 #### Brief backbround 
@@ -14,7 +14,8 @@ Bypasses:
 ## Basic Bypasses
 
 
-####[Trusted Folders]
+#### Trusted Folders
+<a name="trusted-folders"></a>
 
 **The default rules for AppLocker whitelist all executables and scripts located in C:\Program Files, C:\Program Files (x86), and C:\Windows. **
 
