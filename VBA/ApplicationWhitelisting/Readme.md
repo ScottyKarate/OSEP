@@ -2,7 +2,7 @@
 
 Bypasses:
 1) [Trusted Folders](#trusted-folders)
-2) [Bypass with DLLs](#byass-with-dlls)
+2) [Bypass with DLLs](#bypass-with-dlls)
 
 
 #### Brief backbround 
