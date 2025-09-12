@@ -1,7 +1,7 @@
 ## Applocker
 
 Bypasses:
-1) [Trusted Folders](#-Trusted-Folders)
+1) [Trusted Folders](#-trusted-folders)
 
 
 #### Brief backbround 
