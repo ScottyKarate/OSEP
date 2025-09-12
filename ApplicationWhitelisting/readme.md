@@ -5,7 +5,9 @@
 2) [Bypass with DLLs](#bypass-with-dlls)
 3) [Alternate Data Streams](#alternate-data-streams)
 4) [Third Party Executables](#third-party)
+   <br>
 
+### Bypassing AppLocker with PowerShell
 5) [Check Constrained Language mode](#ps-mode)
 <br><br>
 
