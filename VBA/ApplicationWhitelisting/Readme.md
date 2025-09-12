@@ -12,10 +12,10 @@ Bypasses:
 
 
 <br><br>
-## Basic Bypasses
+# Basic Bypasses
 
 
-#### Trusted Folders
+## Trusted Folders
 <a name="trusted-folders"></a>
 
 **The default rules for AppLocker whitelist all executables and scripts located in C:\Program Files, C:\Program Files (x86), and C:\Windows. **
@@ -35,8 +35,9 @@ Ex: icacls.exe C:\Windows\Tasks
 
 3) Clearly move stuff to this folder to execute it.
 
+<br><br>
 
-#### Bypass with DLL's
+## Bypass with DLL's
 <a name="bypass-with-dlls")></a>
 
 **The default ruleset doesn't protect against loading arbitrary DLLs.**
