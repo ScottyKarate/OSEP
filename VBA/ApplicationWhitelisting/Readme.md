@@ -2,6 +2,7 @@
 
 Bypasses:
 1) [Trusted Folders](#trusted-folders)
+2) [Bypass with DLLs](#byass-with-dlls)
 
 
 #### Brief backbround 
@@ -31,3 +32,10 @@ Ex: icacls.exe C:\Windows\Tasks
 
 
 <img width="847" height="273" alt="image" src="https://github.com/user-attachments/assets/e55741da-1d8b-46c5-8815-11838c26c5d4" />
+
+3) Clearly move stuff to this folder to execute it.
+
+
+#### Bypass with DLL's
+<a name="bypass-with-dlls") />
+
