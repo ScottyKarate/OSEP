@@ -39,3 +39,13 @@ Ex: icacls.exe C:\Windows\Tasks
 #### Bypass with DLL's
 <a name="bypass-with-dlls")></a>
 
+**The default ruleset doesn't protect against loading arbitrary DLLs.**
+
+<img width="807" height="346" alt="image" src="https://github.com/user-attachments/assets/192ef529-54b1-4d0b-9cbe-35fe78e9809b" />
+
+**When enabled, default rules allow execution in C:\Windows\* AND C:\Program Files** this does not include C:\program files(x86)
+
+
+
+
+
