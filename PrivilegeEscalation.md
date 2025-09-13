@@ -7,3 +7,10 @@ Get-CimInstance -ClassName win32_service| select Name, State, PathName | Where-O
  
 icacls.exe "C:\Program Files\WSL\wslservice.exe"
 
+
+
+# Powershell History
+
+Get-Content (Get-PSReadlineOption).HistorySavePath
+
+
