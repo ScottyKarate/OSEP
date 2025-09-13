@@ -10,7 +10,8 @@
 ### Bypassing AppLocker with PowerShell
 5) [Check Constrained Language mode](#ps-mode)
 6) [Custom Runspaces (Powershell in C#)](#ps-in-csharp)
-
+7) [Bypassing applocker with C#](#worflow-bypass) (System.Workflow.ComponentModel.dll assembly)
+8) 
 <br><br>
 
 
@@ -165,4 +166,28 @@ namespace BypassApplockerWithCsharpandPowershell
 }
 ```
 
+## Powershell CLM bypass (installutil /uninstall)
+<a name="clm-bypass"></a>
 
+# too tired to finish this section tonight.  Unable to get my .net project to find System.Management for the powershell runtime namesapce
+
+
+Base 64 encode file
+
+```powershell
+certutil -encode C:\Users\Offsec\source\repos\Bypass\Bypass\bin\x64\Release\Bypass.exe file.txt
+```
+
+Base 64 decode file
+
+```powershell
+certutil -decode enc.txt Bypass.exe
+```
+
+## Bypassing Applocker with c# (System.Workflow.ComponentModel.dll assembly)
+<a name="workflow-bypass"></a>
+
+**application must load unsigned managed code into memory. This is typically done through APIs like Load, LoadFile or LoadFrom.**
+
+1) Load suspected library into DNSPY to reverse engineer the managed C# code.
+2) 
