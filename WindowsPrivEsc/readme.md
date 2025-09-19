@@ -51,11 +51,36 @@ Gather:
   ```powershell
   Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
   ```
+<br>
+<br>
+<br>
+
+### Leveraging Windows Services
+<br>
+
+***To get a list of all installed Windows services, we can choose various methods such as the GUI snap-in services.msc, the Get-Service Cmdlet, or the Get-CimInstance Cmdlet (superseding Get-WmiObject)***
+
+<br><br><br>
+#### Service Binary Hijacking
+
+**get all running services, name,state and pathname**
+```powershell
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}
+```
+
+<br>
+<br>
+<br>
+
+  
 
 ### printer spooler enumeration
 Check to see if print spooler is running
 ls "\dc01\pipe\spoolss"
 
+<br>
+<br>
+<br>
 
 
 ### Lateral movement techniques  
