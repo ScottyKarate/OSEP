@@ -64,3 +64,20 @@ x0rME -buf $buf -xorKey $xorKey
 
 
 ```
+
+
+## Base64 encode commands so you can use powershell.exe -enc BASE64
+<br>
+
+``` powershell
+function Get-B64EncodedCommand {
+    param($command)
+
+    $bytes = [System.Text.Encoding]::Unicode.GetBytes($command)
+    $encodedCommand = [Convert]::ToBase64String($bytes)
+
+    Write-Host $encodedCommand
+
+}
+```
+<br><br>
