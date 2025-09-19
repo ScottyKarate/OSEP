@@ -60,7 +60,7 @@ Gather:
 
 ***To get a list of all installed Windows services, we can choose various methods such as the GUI snap-in services.msc, the Get-Service Cmdlet, or the Get-CimInstance Cmdlet (superseding Get-WmiObject)***
 
-<br><br><br>
+<br>
 #### Service Binary Hijacking
 
 **get all running services, name,state and pathname**
@@ -69,11 +69,33 @@ Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Ob
 ```
 
 <br>
-<br>
-<br>
 
-  
+#### DLL Hijacking 
 
+***make a DLL and put it where the other DLL would load from.  Remember DLL load order***
+<img width="845" height="178" alt="image" src="https://github.com/user-attachments/assets/a6b959ab-ae6b-4f8f-86a3-1da2a875e1b5" />
+<br><br><br>
+
+#### Unquoted service paths
+
+Script below searches for unquoted service paths using CMD.exe  
+
+``` cmd
+wmic service get name,pathname |  findstr /i /v "C:\Windows\\" | findstr /i /v """
+```
+
+<br>
+### Scheduled tasks
+
+three pieces of information are vital to obtain from a scheduled task to identify possible privilege escalation vectors:
+
+- As which user account (principal) does this task get executed?
+- What triggers are specified for the task?
+- What actions are executed when one or more of these triggers are met?
+
+***interesting information can be found in the Author, TaskName, Task To Run, Run As User, and Next Run Time fields***
+
+<br><br>
 ### printer spooler enumeration
 Check to see if print spooler is running
 ls "\dc01\pipe\spoolss"
