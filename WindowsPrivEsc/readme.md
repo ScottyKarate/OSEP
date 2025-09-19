@@ -43,4 +43,11 @@ Gather:
   Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname
   ```
 
+### printer spooler enumeration
+Check to see if print spooler is running
+ls "\dc01\pipe\spoolss"
+
+
+  
+
   
