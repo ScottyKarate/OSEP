@@ -5,7 +5,7 @@
 1) ***NTLM authentication*** is used when a client authenticates to a server by IP address (instead of by hostname), or if the user attempts to authenticate to a hostname that is not registered on the Active Directory-integrated DNS server. Likewise, third-party applications may choose to use NTLM authentication instead of Kerberos.
 <img width="840" height="762" alt="image" src="https://github.com/user-attachments/assets/74f1aa65-78e5-416e-a503-f351577f3320" />
 
-<br>
+<br><br>
 
 2) ***Kerberos client authentication*** involves the use of a domain controller in the role of a Key Distribution Center (KDC). The client starts the authentication process with the KDC and not the application server. A KDC service runs on each domain controller and is responsible for session tickets and temporary session keys to users and computers.
 
