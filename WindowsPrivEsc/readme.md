@@ -122,9 +122,12 @@ Enter-PSSession -ComputerName CLIENTWK220 -Credential $cred
 
 <img width="835" height="725" alt="image" src="https://github.com/user-attachments/assets/13bc6534-e9d7-49a6-8c61-a06f995ea0cb" />
 
+<br><br><br>
 
+# PEN-300 course
 
-- 
+### LAPS
+
 
 
   
