@@ -62,5 +62,16 @@ Displays all computers with LAPS enabled, password expriation, and password if u
 **Find-LAPSDelegatedGroups:**  
 Searches through all OUs to see which AD groups can read the ms-Mcs-AdmPwd attribute  
 
+***Could then use PowerView to view members of this group***
+ex: Get-NetGroupMember -GroupName "LAPS Password Readers"  
+
 **Find-AdmPwdExtendedRights**  
 Parses through ExtendedRights for each AD computer with LAPS enabled and looks for which group has read access and if any user has "All Extended Rights". Sysadmins may not be aware the users with All Extended Rights can view passwords and may be less protected than the users in the delegated groups. An example is the user which adds a computer to the domain automatically receives the "All Extended Rights" permission. Since this function will parse ACLs for each AD computer, this can take very long with a larger domain.  
+
+<br><br>
+
+### Access Tokens  
+
+**the operating system also must keep track of the user's access rights, i.e. authorization. Windows uses access tokens to track these rights**  
+
+
