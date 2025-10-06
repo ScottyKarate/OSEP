@@ -1,8 +1,8 @@
 # PEN-300
 
-### Local Windows Credentials
+#### Local Windows Credentials
 
-##### SAM credentials
+## SAM credentials
 
 ***theory***: 
 
@@ -37,6 +37,30 @@ $env:computername
 
 **Mask attack** ./hashcat64.bin -m 1000 -a 3 -w 3 -O hash.txt -1 ?l?d ?1?1?1?1?1?1?1?1?1 -i --increment-min=5
 **Password List** .\hashcat.exe -m 1000 -a 0 -w 3 -O hash.txt password_list.txt
+<br>
+
+# Hardening the Local Administrator Account
+
+### CPassword  
+
+**Cpassword in the SYSVOL folder on the DC can be viewed with Get-GPPPassword.ps1**  
+
+[Get-GPPPassword.ps1](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/refs/heads/master/Exfiltration/Get-GPPPassword.ps1)
+
+<br><br>
 
 
+### LAPS - Local Administrator Password Solution  
 
+***LAPS Toolkit for LAPS enumeration***
+
+[Laps ToolKit download](https://raw.githubusercontent.com/leoloobeek/LAPSToolkit/refs/heads/master/LAPSToolkit.ps1)
+
+**Get-LAPSComputers**:  
+Displays all computers with LAPS enabled, password expriation, and password if user has access  
+
+**Find-LAPSDelegatedGroups:**  
+Searches through all OUs to see which AD groups can read the ms-Mcs-AdmPwd attribute  
+
+**Find-AdmPwdExtendedRights**  
+Parses through ExtendedRights for each AD computer with LAPS enabled and looks for which group has read access and if any user has "All Extended Rights". Sysadmins may not be aware the users with All Extended Rights can view passwords and may be less protected than the users in the delegated groups. An example is the user which adds a computer to the domain automatically receives the "All Extended Rights" permission. Since this function will parse ACLs for each AD computer, this can take very long with a larger domain.  
