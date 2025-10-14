@@ -1,4 +1,7 @@
-#MiniDumpWriteDump.ps11
+#MiniDumpWriteDump.ps1
+
+#Script uses win32 api's to call MiniDumpWriteDump to extract a dump from the PC to get hashes.
+#Dumps to C:\windows\tasks\dump.dmp
 
 Add-Type -TypeDefinition @" 
 
