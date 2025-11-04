@@ -18,12 +18,20 @@ setspn -T corp1 -Q MSSQLSvc/*
 
 # Authentication with C#
 
+### Powershell check connection 
+
+```powershell
+$connectionString = "Server=dc01;database=master;Integrated Security=True"; $sqlconn = [System.Data.SqlClient.SqlConnection]::new($connectionString); $sqlconn.Open(); $sqlCommand = [System.Data.SqlClient.SqlCommand]::new("SELECT * from song", $sqlconn); $sqldatareader = $sqlCommand.ExecuteReader(); while ($sqldatareader.Read()) { Write-Host $sqldatareader[0] }
+```
+
 ### C# executable created called SQLHELPER
 
 
 <img width="1367" height="312" alt="image" src="https://github.com/user-attachments/assets/df9f412a-b6c9-47b1-ac19-6e4ad0a580c6" />
 
 <br><br>
+
+
 
 
 ## Command execution via xp_cmdshell or sp_oacreate/sp_oamethod
