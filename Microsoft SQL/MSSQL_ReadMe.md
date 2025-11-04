@@ -21,7 +21,7 @@ setspn -T corp1 -Q MSSQLSvc/*
 ### Powershell check connection 
 
 ```powershell
-$connectionString = "Server=dc01;database=master;Integrated Security=True"; $sqlconn = [System.Data.SqlClient.SqlConnection]::new($connectionString); $sqlconn.Open(); $sqlCommand = [System.Data.SqlClient.SqlCommand]::new("SELECT * from song", $sqlconn); $sqldatareader = $sqlCommand.ExecuteReader(); while ($sqldatareader.Read()) { Write-Host $sqldatareader[0] }
+$connectionString = "Server=dc01;database=master;Integrated Security=True"; $sqlconn = [System.Data.SqlClient.SqlConnection]::new($connectionString); $sqlconn.Open(); $sqlCommand = [System.Data.SqlClient.SqlCommand]::new("SELECT USER_NAME()", $sqlconn); $sqldatareader = $sqlCommand.ExecuteReader(); while ($sqldatareader.Read()) { Write-Host $sqldatareader[0] }
 ```
 
 ### C# executable created called SQLHELPER
