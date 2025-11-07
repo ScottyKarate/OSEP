@@ -148,8 +148,14 @@ public class StoredProcedure
 The sp_linkedservers stored procedure returns a list of linked servers for us.
 Use OPENQUERY OR AT 
 
+List linked servers if RPC out is enabled.
 ```sql
 SELECT sp_linkedservers; 
+```
+
+List linked servers
+```sql
+EXEC sp_helpserver
 ```
 
 Execute queries across linked SQL servers.  The command below executes commands against DC01.
