@@ -32,6 +32,7 @@ HMODULE LoadLibraryA(
 ## This requires a unmnagedDLL file to execute code. 
 
 ** was only able to get this working with messagebox.  I was unable to get shellcode to execute **
+MSFVENOM dlls are unmanaged as well
 
 ``` c
 
