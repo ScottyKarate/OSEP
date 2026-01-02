@@ -24,6 +24,12 @@ setspn -T corp1 -Q MSSQLSvc/*
 $connectionString = "Server=dc01;database=master;Integrated Security=True"; $sqlconn = [System.Data.SqlClient.SqlConnection]::new($connectionString); $sqlconn.Open(); $sqlCommand = [System.Data.SqlClient.SqlCommand]::new("SELECT USER_NAME()", $sqlconn); $sqldatareader = $sqlCommand.ExecuteReader(); while ($sqldatareader.Read()) { Write-Host $sqldatareader[0] }
 ```
 
+SAME COMMAND AS ABOVE BUT ABLE TO READ STACKED QUERIES
+
+```powershell
+$connectionString = "Server=sql05;database=msdb;Integrated Security=True"; $sqlconn = [System.Data.SqlClient.SqlConnection]::new($connectionString); $sqlconn.Open(); $sqlCommand = [System.Data.SqlClient.SqlCommand]::new("SELECT USER_NAME(); SELECT SYSTEM_USER", $sqlconn); $sqldatareader = $sqlCommand.ExecuteReader(); do { while ($sqldatareader.Read()) { Write-Host $sqldatareader[0] } } while ($sqldatareader.NextResult())
+```
+
 ### C# executable created called SQLHELPER
 
 
