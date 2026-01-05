@@ -1,3 +1,9 @@
+Enumerate AppLocker via powershell after access
+```powershell
+Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
+```
+
+
 ## Applocker
 
 ### basic bypasses:
