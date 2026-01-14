@@ -104,18 +104,24 @@ Convert sids to names:
 
 **GenericAll leads to an attack path:**  
 
-1) Enumerate ACLS for a group using powerview.ps1
+1)
+Enumerate ACLs for a user
+```powershell
+Get-DomainUser | Get-ObjectAcl -ResolveGUIDs | Foreach-Object {$_ | Add-Member -NotePropertyName Identity -NotePropertyValue (ConvertFrom-SID $_.SecurityIdentifier.value) -Force; $_} | Foreach-Object {if ($_.Identity -eq $("$env:UserDomain\$env:Username")) {$_}}
+```
+
+Enumerate ACLS for a group using powerview.ps1
    ```powershell
    Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -eq "GenericAll"} | select SecurityIdentifier,ActiveDirectoryRights
    ```
    <img width="856" height="332" alt="image" src="https://github.com/user-attachments/assets/da22295e-0ad0-4596-a7e7-49efc77543b1" />
 
-2) Convert sids to names:
+6) Convert sids to names:
    
    <img width="852" height="377" alt="image" src="https://github.com/user-attachments/assets/17e6cc5a-a298-4b94-ac74-ad9463f6eb30" />
 
 
-3) Because we have access as stephanie, who has genericall access to "management department" we jjust add ourselves to that group
+7) Because we have access as stephanie, who has genericall access to "management department" we jjust add ourselves to that group
    <img width="886" height="477" alt="image" src="https://github.com/user-attachments/assets/e49424fd-3a19-4cae-837a-2fe89866a27f" />
 
 #### OPSEC:  Delete yourself from the group when done
