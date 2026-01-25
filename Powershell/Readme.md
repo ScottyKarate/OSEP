@@ -31,3 +31,20 @@ function Encode-Buffer {
 }
 
 ```
+
+
+## Enable RDP
+
+``` powershell
+
+Function Enable-RemoteDesktop ([switch]$EnableNetworkLevelAuth) {
+
+    Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+
+    if ($EnableNetworkLevelAuth) { $nlaValue = 1 } else { $nlaValue = 0 }
+
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value $nlaValue
+
+}
+
+```
