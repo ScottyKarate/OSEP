@@ -45,6 +45,9 @@ Function Enable-RemoteDesktop ([switch]$EnableNetworkLevelAuth) {
 
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value $nlaValue
 
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LimitBlankPasswordUse" -Value 0 -Type DWORD -Force
+
+
 }
 
 ```
