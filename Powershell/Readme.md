@@ -48,3 +48,13 @@ Function Enable-RemoteDesktop ([switch]$EnableNetworkLevelAuth) {
 }
 
 ```
+
+
+### Shut off firewall
+
+``` powershell
+
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+
+```
