@@ -39,6 +39,8 @@ function Encode-Buffer {
 
 Function Enable-RemoteDesktop ([switch]$EnableNetworkLevelAuth) {
 
+    Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Lsa' -Name 'DisableRestrictedAdmin' -Value 0 -Type DWORD -Force
+
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
 
     if ($EnableNetworkLevelAuth) { $nlaValue = 1 } else { $nlaValue = 0 }
