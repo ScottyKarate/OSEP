@@ -1,6 +1,4 @@
 Set-MpPreference -DisableRealtimeMonitoring $true
-
-
 Set-MpPreference -DisableIntrusionPreventionSystem $true
 Set-MpPreference -DisableIOAVProtection $true 
 Set-MpPreference -DisableScriptScanning $true
