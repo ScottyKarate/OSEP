@@ -63,3 +63,9 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 
 
 ```
+
+### Add exception
+
+``` powershell
+Add-MpPreference -ExclusionPath 'C:\Path\To\Your\Folder'
+```
